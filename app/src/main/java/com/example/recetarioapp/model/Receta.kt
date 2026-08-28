@@ -8,6 +8,7 @@ object Dificultad {
 
 data class Receta (
 
+    val id: Long,
     val nombre: String,
     val tiempo: Int,            //tiempo en minutos
     val dificultad: String,

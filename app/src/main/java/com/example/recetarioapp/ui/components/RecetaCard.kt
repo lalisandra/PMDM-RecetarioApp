@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,10 +27,15 @@ import com.example.recetarioapp.model.Receta
 @Composable
 fun RecetaCard (
     modifier: Modifier,
-    receta: Receta
+    receta: Receta,
+    onClick: (Long) -> Unit
 ){
     Card(
-        modifier = modifier
+        modifier = modifier,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
+        ),
+        onClick = { onClick(receta.id) }
     ) {
         Row (
             modifier = Modifier
@@ -44,7 +50,10 @@ fun RecetaCard (
             )
 
             Column() {
-                Text(text = receta.nombre, style = MaterialTheme.typography.titleLarge)
+                Text(
+                    text = receta.nombre,
+                    style = MaterialTheme.typography.titleLarge,
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
@@ -79,9 +88,12 @@ private fun RecetaCardPreview (){
     RecetaCard(
         modifier = Modifier,
         receta = Receta(
-        nombre = "Nombre de la Receta",
-        tiempo = 25,
-        dificultad = Dificultad.MEDIA,
-        descripcion = "La clásica receta italiana elaborada con huevo, queso parmesano, panceta y pimienta negra. Cremosa y llena de sabor."
-    ))
+            id = 0,
+            nombre = "Nombre de la Receta",
+            tiempo = 25,
+            dificultad = Dificultad.MEDIA,
+            descripcion = "La clásica receta italiana elaborada con huevo, queso parmesano, panceta y pimienta negra. Cremosa y llena de sabor."
+        ),
+        onClick = { }
+    )
 }

@@ -2,12 +2,9 @@ package com.example.recetarioapp.ui.theme.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,30 +16,28 @@ import com.example.recetarioapp.ui.components.RecetaCard
 
 
 @Composable
-fun MainScreen (
+fun ListaRecetasScreen (
     modifier: Modifier,
-    recetas: List<Receta>
+    recetas: List<Receta>,
+    onRecetaClick: (Long) -> Unit
 ){
     Column(
         modifier = modifier
+            .padding(12.dp)
     ) {
-
-        Text(text = "Recetario APP", style = MaterialTheme.typography.displaySmall)
-
-        Spacer(modifier = Modifier.height(8.dp))
-
         RecetasList(
             modifier = Modifier.fillMaxWidth(),
-            recetas = recetas
+            recetas = recetas,
+            onRecetaClick = { onRecetaClick(it) }
         )
-
     }
 }
 
 @Composable
 fun RecetasList(
     modifier: Modifier,
-    recetas: List<Receta>
+    recetas: List<Receta>,
+    onRecetaClick: (Long) -> Unit
 ){
     LazyColumn(
         modifier = modifier,
@@ -51,7 +46,9 @@ fun RecetasList(
         items(20){
             RecetaCard(
                 modifier = Modifier.fillMaxWidth(),
-                receta = recetas.random())
+                receta = recetas.random(),
+                onClick = { onRecetaClick(it) }
+            )
         }
     }
 }
@@ -62,9 +59,10 @@ fun RecetaListPreview(){
     RecetasList(
         modifier = Modifier,
         recetas = listOf(
-            Receta( nombre = "Receta I", tiempo = 5, dificultad = Dificultad.FACIL, descripcion = " " ),
-            Receta( nombre = "Receta II", tiempo = 15, dificultad = Dificultad.MEDIA, descripcion = " " ),
-            Receta( nombre = "Receta III", tiempo = 25, dificultad = Dificultad.DIFICIL, descripcion = " " )
-        )
+            Receta( id = 0, nombre = "Receta I", tiempo = 5, dificultad = Dificultad.FACIL, descripcion = " " ),
+            Receta( id = 0, nombre = "Receta II", tiempo = 15, dificultad = Dificultad.MEDIA, descripcion = " " ),
+            Receta( id = 0, nombre = "Receta III", tiempo = 25, dificultad = Dificultad.DIFICIL, descripcion = " " )
+        ),
+        onRecetaClick = { }
     )
 }
