@@ -141,6 +141,7 @@ fun AppNavHost (
                         listarecetas[indice] = recetaActualizada
                     }
                     //esto encuentra la receta en la lista y la sustituye por la nueva versión
+
                     navController.popBackStack()
                 },
                 onCancelarClick = { navController.popBackStack() },
