@@ -145,7 +145,7 @@ fun RecetaFormScreen(
                             Receta(
                                 id = recetaInicial?.id ?: 0,
                                 nombre = nombre,
-                                tiempo = tiempo.toIntOrNull() ?: 0,
+                                tiempo = tiempo.toInt(),
                                 dificultad = dificultadOptions[dificultadIndex],
                                 descripcion = descripcion
                             )
