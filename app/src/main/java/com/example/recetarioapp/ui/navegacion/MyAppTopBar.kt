@@ -6,7 +6,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,6 +23,9 @@ fun MyAppTopBar (
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
+    val recetaId = navBackStackEntry?.arguments?.getLong("recetaId")
+    //Si estoy en una ruta con recetaId en su ruta lo extrae, si no, es null
+
     TopAppBar(
         title = {
             Text( text =
@@ -32,6 +34,8 @@ fun MyAppTopBar (
                     Rutas.DETALLE -> "Receta"
                     Rutas.PERFIL -> "Mi perfil"
                     Rutas.RECETAS -> "Todas mis recetas"
+                    Rutas.NUEVA_RECETA -> "Nueva Receta"
+                    Rutas.EDITAR_RECETA -> "Editar Receta"
                     else -> ""
                 },
                 style = MaterialTheme.typography.headlineLarge
@@ -39,8 +43,15 @@ fun MyAppTopBar (
         },
         navigationIcon = {
             if(currentRoute != Rutas.HOME) {
-                IconButton(onClick = {navController.popBackStack() }) {
+                IconButton(onClick = { navController.popBackStack() }) {
                     Icon(painter = painterResource(R.drawable.arrow_back), contentDescription = "Volver" )
+                }
+            }
+        },
+        actions = {
+            if(currentRoute == Rutas.DETALLE && recetaId != null) {
+                IconButton( onClick = { navController.navigate(Rutas.recetaFormConId(recetaId)) } ) {
+                    Icon(painter = painterResource(R.drawable.edit_icon), contentDescription = "edit" )
                 }
             }
         },

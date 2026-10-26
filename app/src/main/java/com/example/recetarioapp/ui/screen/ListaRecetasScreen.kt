@@ -5,6 +5,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,7 +24,8 @@ import com.example.recetarioapp.ui.components.RecetaCard
 fun ListaRecetasScreen (
     modifier: Modifier,
     recetas: List<Receta>,
-    onRecetaClick: (Long) -> Unit
+    onRecetaClick: (Long) -> Unit,
+    onNuevaRecetaClick: () -> Unit
 ){
     Column(
         modifier = modifier
@@ -28,7 +34,8 @@ fun ListaRecetasScreen (
         RecetasList(
             modifier = Modifier.fillMaxWidth(),
             recetas = recetas,
-            onRecetaClick = { onRecetaClick(it) }
+            onRecetaClick = { onRecetaClick(it) },
+            onNuevaRecetaClick = { onNuevaRecetaClick() }
         )
     }
 }
@@ -37,18 +44,47 @@ fun ListaRecetasScreen (
 fun RecetasList(
     modifier: Modifier,
     recetas: List<Receta>,
-    onRecetaClick: (Long) -> Unit
+    onRecetaClick: (Long) -> Unit,
+    onNuevaRecetaClick: () -> Unit
 ){
-    LazyColumn(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+    Column(
+
     ) {
-        items(20){
-            RecetaCard(
-                modifier = Modifier.fillMaxWidth(),
-                receta = recetas.random(),
-                onClick = { onRecetaClick(it) }
-            )
+        LazyColumn(
+            modifier = modifier,
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            item {
+                ElevatedCard (
+                    elevation = CardDefaults.cardElevation(
+                        defaultElevation = 6.dp
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                    ),
+                    onClick = { onNuevaRecetaClick() }
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .padding(
+                                top = 12.dp,
+                                bottom = 12.dp,
+                            ),
+                        text = "Nueva Receta",
+                        style = MaterialTheme.typography.headlineLarge
+                    )
+                }
+            }
+             items(recetas){ receta ->
+                 RecetaCard(
+                     modifier = Modifier,
+                     receta = receta,
+                     onClick = { onRecetaClick(receta.id)}
+                 )
+             }
         }
     }
 }
@@ -63,6 +99,7 @@ fun RecetaListPreview(){
             Receta( id = 0, nombre = "Receta II", tiempo = 15, dificultad = Dificultad.MEDIA, descripcion = " " ),
             Receta( id = 0, nombre = "Receta III", tiempo = 25, dificultad = Dificultad.DIFICIL, descripcion = " " )
         ),
-        onRecetaClick = { }
+        onRecetaClick = { },
+        onNuevaRecetaClick = { }
     )
 }

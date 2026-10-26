@@ -1,5 +1,6 @@
 package com.example.recetarioapp
 
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = { MyAppTopBar(navController = navController) },
-                    bottomBar = { MyAppBottomBar(navController = navController) }
+                    bottomBar = { MyAppBottomBar(navController = navController) },
                 ) { innerPadding ->
 
                     AppNavHost(

@@ -23,7 +23,12 @@ fun MyAppBottomBar (
         NavigationBarItem(
             selected = currentRoute == Rutas.HOME,
             onClick = { navController.navigate(Rutas.HOME)},
-            icon = { Icon(painter = painterResource(R.drawable.home_icon), contentDescription = "Home") },
+            icon = {
+                Icon(
+                    painter = painterResource(R.drawable.home_icon),
+                    contentDescription = "Home"
+                )
+            },
             label = { Text("Home") }
         )
 
