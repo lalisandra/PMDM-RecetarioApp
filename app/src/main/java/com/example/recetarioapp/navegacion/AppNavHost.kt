@@ -1,4 +1,4 @@
-package com.example.recetarioapp.ui.navegacion
+package com.example.recetarioapp.navegacion
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

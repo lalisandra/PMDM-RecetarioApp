@@ -1,4 +1,4 @@
-package com.example.recetarioapp.ui.navegacion
+package com.example.recetarioapp.navegacion
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon

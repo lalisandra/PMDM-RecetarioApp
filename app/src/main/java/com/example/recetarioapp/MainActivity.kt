@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.example.recetarioapp.ui.navegacion.AppNavHost
-import com.example.recetarioapp.ui.navegacion.MyAppBottomBar
-import com.example.recetarioapp.ui.navegacion.MyAppTopBar
+import com.example.recetarioapp.navegacion.AppNavHost
+import com.example.recetarioapp.navegacion.MyAppBottomBar
+import com.example.recetarioapp.navegacion.MyAppTopBar
 import com.example.recetarioapp.ui.theme.RecetarioAppTheme
 
 class MainActivity : ComponentActivity() {
